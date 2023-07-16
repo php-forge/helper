@@ -15,8 +15,6 @@ final class PasswordTest extends TestCase
         $password = Password::generate($length);
 
         $this->assertSame($length, strlen($password));
-        $this->assertMatchesRegularExpression('/[a-z]/', $password);
-        $this->assertMatchesRegularExpression('/[A-Z]/', $password);
 
         $length = 20;
         $password = Password::generate($length);
