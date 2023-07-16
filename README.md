@@ -1,8 +1,8 @@
 <p align="center">
-    <a href="https://github.com/yii-tools/template" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/121752654?s=200&v=4" height="100px">
+    <a href="https://github.com/php-forge/helpers" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/103309199?s%25253D400%252526u%25253Dca3561c692f53ed7eb290d3bb226a2828741606f%252526v%25253D4" height="100px">
     </a>
-    <h1 align="center">Template.</h1>
+    <h1 align="center">Collection of Helpers for PHP.</h1>
     <br>
 </p>
 
@@ -22,12 +22,12 @@ For install this package, you need [composer](https://getcomposer.org/).
 
 ## CI status
 
-[![build](https://github.com/yii-tools/template/actions/workflows/build.yml/badge.svg)](https://github.com/yii-tools/template/actions/workflows/build.yml)
-[![codecov](https://codecov.io/gh/yii-tools/template/branch/main/graph/badge.svg?token=MF0XUGVLYC)](https://codecov.io/gh/yii-tools/template)
-[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fyii-tools%2Ftemplate%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/yii-tools/template/main)
-[![static analysis](https://github.com/yii-tools/template/actions/workflows/static.yml/badge.svg)](https://github.com/yii-tools/template/actions/workflows/static.yml)
-[![type-coverage](https://shepherd.dev/github/yii-tools/template/coverage.svg)](https://shepherd.dev/github/yii-tools/template)
-[![StyleCI](https://github.styleci.io/repos/494495136/shield?branch=main)](https://github.styleci.io/repos/494495136?branch=main)
+[![build](https://github.com/php-forge/template/actions/workflows/build.yml/badge.svg)](https://github.com/php-forge/template/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/php-forge/template/branch/main/graph/badge.svg?token=MF0XUGVLYC)](https://codecov.io/gh/php-forge/template)
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fphp-forge%2Fhelpers%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/php-forge/helpers/main)
+[![static analysis](https://github.com/php-forge/template/actions/workflows/static.yml/badge.svg)](https://github.com/php-forge/template/actions/workflows/static.yml)
+[![type-coverage](https://shepherd.dev/github/php-forge/template/coverage.svg)](https://shepherd.dev/github/php-forge/template)
+[![StyleCI](https://github.styleci.io/repos/667051036/shield?branch=main)](https://github.styleci.io/repos/667051036?branch=main)
 
 ## Our social networks
 

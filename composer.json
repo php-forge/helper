@@ -1,9 +1,10 @@
 {
-    "name": "yii-tools/template",
+    "name": "php-forge/helpers",
     "type": "library",
-    "description": "_____",
+    "description": "Collection of Helpers for PHP.",
     "keywords": [
-        "_____"
+        "php-forge",
+        "helpers"
     ],
     "license": "mit",
     "minimum-stability": "dev",
@@ -19,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Template\\": "src"
+            "PHPForge\\Helpers\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Template\\Tests\\": "tests"
+            "PHPForge\\Helpers\\Tests\\": "tests"
         }
     },
     "extra": {
