@@ -24,10 +24,10 @@ For install this package, you need [composer](https://getcomposer.org/).
 
 [![build](https://github.com/php-forge/template/actions/workflows/build.yml/badge.svg)](https://github.com/php-forge/template/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/php-forge/template/branch/main/graph/badge.svg?token=MF0XUGVLYC)](https://codecov.io/gh/php-forge/template)
-[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fphp-forge%2Ftemplate%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/php-forge/template/main)
+[![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fphp-forge%2Fhelpers%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/php-forge/helpers/main)
 [![static analysis](https://github.com/php-forge/template/actions/workflows/static.yml/badge.svg)](https://github.com/php-forge/template/actions/workflows/static.yml)
 [![type-coverage](https://shepherd.dev/github/php-forge/template/coverage.svg)](https://shepherd.dev/github/php-forge/template)
-[![StyleCI](https://github.styleci.io/repos/494495136/shield?branch=main)](https://github.styleci.io/repos/494495136?branch=main)
+[![StyleCI](https://github.styleci.io/repos/667051036/shield?branch=main)](https://github.styleci.io/repos/667051036?branch=main)
 
 ## Our social networks
 
