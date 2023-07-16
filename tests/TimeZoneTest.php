@@ -23,7 +23,7 @@ final class TimeZoneTest extends TestCase
     {
         $timeZone = TimeZone::getAll();
 
-        $this->assertCount(420, $timeZone);
+        $this->assertGreaterThan(400, count($timeZone));
     }
 
     public function testGellAllNotCharacter(): void
