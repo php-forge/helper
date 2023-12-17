@@ -24,15 +24,17 @@ final class TimeZone
         $listsIdentifiers = DateTimeZone::listIdentifiers();
 
         foreach ($listsIdentifiers as $timeZone) {
-            $name = str_replace('_', ' ', $timeZone);
-            $date = new DateTime('now', new DateTimeZone($timeZone));
-            $timeZones[] =
-                [
-                    'timezone' => $timeZone,
-                    'name' => "$name (UTC {$date->format('P')})",
-                    'offset' => $date->getOffset(),
-                ]
-            ;
+            if (!empty($timeZone)) {
+                $name = str_replace('_', ' ', $timeZone);
+                $date = new DateTime('now', new DateTimeZone($timeZone));
+                $timeZones[] =
+                    [
+                        'timezone' => $timeZone,
+                        'name' => "$name (UTC {$date->format('P')})",
+                        'offset' => $date->getOffset(),
+                    ]
+                ;
+            }
         }
 
         $offsets = array_column($timeZones, 'offset');
