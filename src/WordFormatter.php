@@ -66,15 +66,14 @@ final class WordFormatter
     {
         $snakeCase = preg_replace('/([A-Z])/', '_$1', $value);
         $snakeCase = ltrim($snakeCase, '_'); // Eliminar guión bajo inicial si está presente
-        $snakeCase = strtolower($snakeCase);
-
-        return $snakeCase;
+        return strtolower($snakeCase);
     }
 
     /**
      * Convert a snake_case formatted string to camelCase.
      *
      * @param string $snakeCaseString The snake_case formatted string to convert.
+     *
      * @return string The converted camelCase string.
      */
     public static function snakeCaseToCamelCase(string $snakeCaseString): string
