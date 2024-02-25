@@ -12,13 +12,18 @@
 .idea
 
 # phpunit
-phpunit.phar
-.phpunit.result.cache
 .phpunit.cache
-phpunit.xlm
+.phpunit.result.cache
+phpunit.xml
+phpunit.phar
 
 #yii3 config packages
 /config/packages
 
 # windows thumbnail cache
 Thumbs.db
+
+# security private repo
+auth.json
+
+.vscode

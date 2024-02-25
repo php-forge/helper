@@ -22,9 +22,9 @@ final class Password
      * Generates user-friendly random password containing at least one lower case letter, one uppercase letter and one
      * digit. The remaining characters in the password are chosen at random from those three sets
      *
-     * @param int $length
+     * @param int $length The length of the password to generate.
      *
-     * @return string
+     * @return string The generated password.
      */
     public static function generate(int $length): string
     {
@@ -35,7 +35,7 @@ final class Password
         $password = implode(
             '',
             array_map(
-                static fn (int $i) => $chars[random_int($i, $chars_length - $i)],
+                static fn(int $i) => $chars[random_int($i, $chars_length - $i)],
                 range(1, $length),
             ),
         );
