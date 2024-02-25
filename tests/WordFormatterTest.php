@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPForge\Helpers\Tests;
+namespace PHPForge\Helper\Tests;
 
-use PHPForge\Helpers\WordFormatter;
+use PHPForge\Helper\WordFormatter;
 use PHPUnit\Framework\TestCase;
 
 final class WordFormatterTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPForge\Helpers\Tests;
+namespace PHPForge\Helper\Tests;
 
-use PHPForge\Helpers\Password;
+use PHPForge\Helper\Password;
 use PHPUnit\Framework\TestCase;
 
 final class PasswordTest extends TestCase

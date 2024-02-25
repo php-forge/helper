@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPForge\Helpers;
+namespace PHPForge\Helper;
 
 use function explode;
 use function implode;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PHPForge\Helpers\Tests;
+namespace PHPForge\Helper\Tests;
 
-use PHPForge\Helpers\TimeZone;
+use PHPForge\Helper\TimeZone;
 use PHPUnit\Framework\TestCase;
 
 final class TimeZoneTest extends TestCase
@@ -41,12 +41,12 @@ final class TimeZoneTest extends TestCase
         $prevOffset = null;
 
         foreach ($timeZones as $timeZone) {
-            // Verifica que el offset sea mayor o igual al offset anterior
+            // verify that the offset is greater than or equal to the previous offset
             if ($prevOffset !== null) {
                 $this->assertGreaterThanOrEqual($prevOffset, $timeZone['offset']);
             }
 
-            // Verifica que el array tenga las claves correctas
+            // verify that the array contains the expected keys
             $this->assertArrayHasKey('timezone', $timeZone);
             $this->assertArrayHasKey('name', $timeZone);
             $this->assertArrayHasKey('offset', $timeZone);

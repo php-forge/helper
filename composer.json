@@ -1,10 +1,10 @@
 {
-    "name": "php-forge/helpers",
+    "name": "php-forge/helper",
     "type": "library",
-    "description": "Collection of Helpers for PHP.",
+    "description": "Collection of Helper for PHP.",
     "keywords": [
         "php-forge",
-        "helpers"
+        "helper"
     ],
     "license": "mit",
     "require": {
@@ -19,12 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPForge\\Helpers\\": "src"
+            "PHPForge\\Helper\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPForge\\Helpers\\Tests\\": "tests"
+            "PHPForge\\Helper\\Tests\\": "tests"
         }
     },
     "extra": {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PHPForge\Helpers;
+namespace PHPForge\Helper;
 
 use DateTime;
 use DateTimeZone;
