@@ -11,12 +11,28 @@ use Exception;
 use function array_column;
 use function array_multisort;
 
+/**
+ * Provides methods to work with time zones.
+ */
 final class TimeZone
 {
     /**
-     * @throws Exception
+     * Get all time zones.
      *
-     * @psalm-return array<array-key, array<array-key, mixed>|object>
+     * This method retrieves information about all available time zones, including their names, offsets, and formatted
+     * names.
+     *
+     * @throws Exception When an error occurs while fetching time zone information.
+     *
+     * @return array Returns an array containing information about all available time zones.
+     * The array is sorted by offset in ascending order.
+     * Each element of the array is an associative array with the following keys:
+     * - 'timezone': The time zone identifier.
+     * - 'name': The formatted name of the time zone, including the offset.
+     * - 'offset': The offset of the time zone from UTC in seconds.
+     * If the operation fails, an empty array is returned.
+     *
+     * @psalm-return array<array-key, array<string, mixed>>
      */
     public static function getAll(): array
     {

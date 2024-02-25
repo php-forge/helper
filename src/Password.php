@@ -11,7 +11,7 @@ use function strlen;
 
 /**
  * Provides a method to generate user-friendly random passwords containing at least one lowercase letter, one uppercase
- * letter, and one digit. The remaining characters in the password are chosen at random from a set of special
+ * letter, and one digit. The remaining characters in the password are chosen at random from a set of special 
  * characters, making it suitable for creating secure yet user-friendly passwords.
  */
 final class Password
