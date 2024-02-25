@@ -2,7 +2,7 @@
     <a href="https://github.com/php-forge/helpers" target="_blank">
         <img src="https://avatars.githubusercontent.com/u/103309199?s%25253D400%252526u%25253Dca3561c692f53ed7eb290d3bb226a2828741606f%252526v%25253D4" height="100px">
     </a>
-    <h1 align="center">Collection of Helpers for PHP.</h1>
+    <h1 align="center">Collection of Helper for PHP.</h1>
     <br>
 </p>
 
@@ -45,7 +45,71 @@ or add
 
 ## Usage
 
-[Check the documentation docs](/docs/README.md) to learn about usage.
+The repository contains a collection of utility functions designed to simplify common programming tasks in PHP.
+
+Whether you're working on web development, data processing, or other projects, these helper functions can save you time
+and effort.
+
+## Converts a camelCase formatted string to snake_case
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use PHPForge\Helper\WordFormatter;
+
+$word = WordFormatter::camelCaseToSnakeCase('date_birth');
+```
+
+## Convert a snake_case formatted string to camelCase
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use PHPForge\Helper\WordFormatter;
+
+$word = WordFormatter::snakeCaseToCamelCase('date_birth');
+```
+
+##  Converts a string to words with capitalized first letters
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use PHPForge\Helper\WordFormatter;
+
+$word = WordFormatter::capitalizeToWords('Date Birth');
+```
+
+## Generate ramdon pasword
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use PHPForge\Helper\Password;
+
+$password = Password::generate(8);
+```
+
+
+## Get all timezones
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use PHPForge\Helper\Timezone;
+
+$timezones = Timezone::getAll();
+```
 
 ## Testing
 
