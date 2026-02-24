@@ -40,7 +40,7 @@ composer require php-forge/helper:^0.1
 
 ### Quick start
 
-#### Convert camel case to snake case
+#### Convert camelCase to snake_case
 
 ```php
 <?php
@@ -55,7 +55,7 @@ $word = WordCaseConverter::camelToSnake('dateBirth');
 // date_birth
 ```
 
-#### Convert snake case to camel case
+#### Convert snake_case to camelCase
 
 ```php
 <?php
