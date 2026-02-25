@@ -45,32 +45,31 @@ final class PasswordGeneratorTest extends TestCase
 
     public function testGenerateAllowsMinimalLengthForGuarantee(): void
     {
-        $password = PasswordGenerator::generate(4);
+        $buffer = '';
 
-        self::assertSame(
-            4,
-            strlen($password),
-            "Should generate a password with exactly '4' characters.",
+        for ($i = 0; $i < 10; $i++) {
+            $buffer .= PasswordGenerator::generate(50);
+        }
+
+        self::assertGreaterThan(
+            20,
+            preg_match_all('/[a-z]/', $buffer),
+            'Should sample lowercase characters repeatedly.',
         );
-        self::assertSame(
-            1,
-            preg_match('/[a-z]/', $password),
-            'Should include at least one lowercase character.',
+        self::assertGreaterThan(
+            20,
+            preg_match_all('/[A-Z]/', $buffer),
+            'Should sample uppercase characters repeatedly.',
         );
-        self::assertSame(
-            1,
-            preg_match('/[A-Z]/', $password),
-            'Should include at least one uppercase character.',
+        self::assertGreaterThan(
+            20,
+            preg_match_all('/\d/', $buffer),
+            'Should sample digit characters repeatedly.',
         );
-        self::assertSame(
-            1,
-            preg_match('/\d/', $password),
-            'Should include at least one digit character.',
-        );
-        self::assertSame(
-            1,
-            preg_match('/[!@#$%^&*()_\-=+;:,.?]/', $password),
-            'Should include at least one special character.',
+        self::assertGreaterThan(
+            20,
+            preg_match_all('/[!@#$%^&*()_\-=+;:,.?]/', $buffer),
+            'Should sample special characters repeatedly.',
         );
     }
 

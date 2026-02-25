@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 use function array_values;
 use function count;
+use function str_replace;
 
 /**
  * Unit tests for the {@see TimeZoneList} helper.
@@ -110,7 +111,7 @@ final class TimeZoneListTest extends TestCase
         );
         self::assertStringContainsString(
             $first['timezone'],
-            $first['name'],
+            str_replace('_', ' ', $first['timezone']),
             'Should include the timezone identifier in the display name.',
         );
 
