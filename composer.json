@@ -1,10 +1,11 @@
 {
     "name": "php-forge/helper",
     "type": "library",
-    "description": "Collection of Helper for PHP.",
+    "description": "PHP Helper.",
     "keywords": [
         "php-forge",
-        "helper"
+        "helper",
+        "php"
     ],
     "license": "BSD-3-Clause",
     "require": {
