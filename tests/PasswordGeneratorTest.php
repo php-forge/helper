@@ -172,7 +172,7 @@ final class PasswordGeneratorTest extends TestCase
      * Verifies character pool construction follows the expected order: lowercase, uppercase, digits, special.
      *
      * - This test verifies pool ordering internals.
-     * - Refactoring the poolconstruction will require updating the expected character positions.
+     * - Refactoring the pool construction will require updating the expected character positions.
      */
     #[DataProviderExternal(PasswordGeneratorProvider::class, 'poolIndexes')]
     public function testGenerateUsesExpectedCharacterPoolOrder(int $poolIndex, string $expectedPoolCharacter): void
