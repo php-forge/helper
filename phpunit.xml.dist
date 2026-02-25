@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd"
-  bootstrap="vendor/autoload.php"
-  cacheDirectory=".phpunit.cache"
+  xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+  bootstrap="./vendor/autoload.php"
+  cacheDirectory="./runtime/.phpunit.cache"
   colors="true"
   executionOrder="depends,defects"
   failOnRisky="true"
@@ -11,10 +11,14 @@
   stopOnFailure="false"
 >
   <testsuites>
-    <testsuite name="Helpers">
+    <testsuite name="PHPForge-Helper">
       <directory>tests</directory>
     </testsuite>
   </testsuites>
+
+  <extensions>
+    <bootstrap class="PHPForge\Helper\Tests\Support\MockerExtension" />
+  </extensions>
 
   <source>
     <include>

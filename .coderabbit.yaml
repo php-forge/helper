@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 language: en-US
-tone_instructions: ''
+tone_instructions: ""
 early_access: true
 enable_free_tier: true
 inheritance: true
@@ -8,11 +8,11 @@ reviews:
   profile: assertive
   request_changes_workflow: true
   high_level_summary: true
-  high_level_summary_instructions: ''
-  high_level_summary_placeholder: '@coderabbitai summary'
+  high_level_summary_instructions: ""
+  high_level_summary_placeholder: "@coderabbitai summary"
   high_level_summary_in_walkthrough: true
-  auto_title_placeholder: '@coderabbitai'
-  auto_title_instructions: ''
+  auto_title_placeholder: "@coderabbitai"
+  auto_title_instructions: ""
   review_status: true
   review_details: true
   commit_status: true
@@ -38,7 +38,7 @@ reviews:
   disable_cache: false
   auto_review:
     enabled: true
-    description_keyword: ''
+    description_keyword: ""
     auto_incremental_review: true
     auto_pause_after_reviewed_commits: 5
     ignore_title_keywords: []
@@ -58,7 +58,7 @@ reviews:
       threshold: 80
     title:
       mode: warning
-      requirements: ''
+      requirements: ""
     description:
       mode: warning
     issue_assessment:

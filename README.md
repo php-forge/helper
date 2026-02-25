@@ -1,128 +1,143 @@
+<!-- markdownlint-disable MD041 -->
 <p align="center">
-    <a href="https://github.com/php-forge/helpers" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/103309199?s%25253D400%252526u%25253Dca3561c692f53ed7eb290d3bb226a2828741606f%252526v%25253D4" height="100px">
+    <a href="https://github.com/php-forge/helper" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/103309199?s=400&u=ca3561c692f53ed7eb290d3bb226a2828741606f&v=4" alt="PHP Forge" width="150px">
     </a>
-    <h1 align="center">Collection of Helper for PHP.</h1>
+    <h1 align="center">PHP Helper</h1>
     <br>
 </p>
+<!-- markdownlint-enable MD041 -->
 
 <p align="center">
-    <a href="https://github.com/php-forge/helpers/actions/workflows/build.yml" target="_blank">
-        <img src="https://github.com/php-forge/helpers/actions/workflows/build.yml/badge.svg" alt="PHPUnit">
+    <a href="https://github.com/php-forge/helper/actions/workflows/build.yml" target="_blank">
+        <img src="https://img.shields.io/github/actions/workflow/status/php-forge/helper/build.yml?style=for-the-badge&label=PHPUnit&logo=github" alt="PHPUnit">
     </a>
-    <a href="https://codecov.io/gh/php-forge/helpers" target="_blank">
-        <img src="https://codecov.io/gh/php-forge/helpers/branch/main/graph/badge.svg?token=MF0XUGVLYC" alt="Codecov">
+    <a href="https://dashboard.stryker-mutator.io/reports/github.com/php-forge/helper/main" target="_blank">
+        <img src="https://img.shields.io/endpoint?style=for-the-badge&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fphp-forge%2Fhelper%2Fmain" alt="Mutation Testing">
     </a>
-    <a href="https://dashboard.stryker-mutator.io/reports/github.com/php-forge/helpers/main" target="_blank">
-        <img src="https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fphp-forge%2Fhelpers%2Fmain" alt="Infection">
-    </a>
-    <a href="https://github.com/php-forge/helpers/actions/workflows/static.yml" target="_blank">
-        <img src="https://github.com/php-forge/helpers/actions/workflows/static.yml/badge.svg" alt="Psalm">
-    </a>
-    <a href="https://shepherd.dev/github/php-forge/helpers" target="_blank">
-        <img src="https://shepherd.dev/github/php-forge/helpers/coverage.svg" alt="Psalm Coverage">
-    </a>
-    <a href="https://github.styleci.io/repos/667051036?branch=main">
-        <img src="https://github.styleci.io/repos/667051036/shield?branch=main" alt="StyleCI">
+    <a href="https://github.com/php-forge/helper/actions/workflows/static.yml" target="_blank">
+        <img src="https://img.shields.io/github/actions/workflow/status/php-forge/helper/static.yml?style=for-the-badge&label=PHPStan&logo=github" alt="PHPStan">
     </a>
 </p>
 
-## Installation
+<p align="center">
+    <strong>Small, focused helpers for common PHP tasks</strong><br>
+    <em>Convert word casing, generate passwords, and list time zones with predictable output.</em>
+</p>
 
-The preferred way to install this extension is through [composer](https://getcomposer.org/download/).
+## Features
 
-Either run
+<picture>
+    <source media="(min-width: 768px)" srcset="./docs/svgs/features.svg">
+    <img src="./docs/svgs/features-mobile.svg" alt="Feature Overview" style="width: 100%;">
+</picture>
 
-```shell
-composer require --prefer-dist php-forge/helpers:"^0.1"
+### Installation
+
+```bash
+composer require php-forge/helper:^0.1
 ```
 
-or add
+### Quick start
 
-```json
-"php-forge/helpers": "^0.1"
-```
-
-## Usage
-
-The repository contains a collection of utility functions designed to simplify common programming tasks in PHP.
-
-Whether you're working on web development, data processing, or other projects, these helper functions can save you time
-and effort.
-
-## Converts a camelCase formatted string to snake_case
+#### Convert camelCase to snake_case
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-use PHPForge\Helper\WordFormatter;
+namespace App;
 
-$word = WordFormatter::camelCaseToSnakeCase('date_birth');
+use PHPForge\Helper\WordCaseConverter;
+
+$word = WordCaseConverter::camelToSnake('dateBirth');
+// date_birth
 ```
 
-## Convert a snake_case formatted string to camelCase
+#### Convert snake_case to camelCase
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-use PHPForge\Helper\WordFormatter;
+namespace App;
 
-$word = WordFormatter::snakeCaseToCamelCase('date_birth');
+use PHPForge\Helper\WordCaseConverter;
+
+$word = WordCaseConverter::snakeToCamel('date_birth');
+// dateBirth
 ```
 
-##  Converts a string to words with capitalized first letters
+#### Convert text to title words
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-use PHPForge\Helper\WordFormatter;
+namespace App;
 
-$word = WordFormatter::capitalizeToWords('Date Birth');
+use PHPForge\Helper\WordCaseConverter;
+
+$word = WordCaseConverter::toTitleWords('dateOfMessage');
+// Date Of Message
 ```
 
-## Generate ramdon pasword
+#### Generate passwords
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-use PHPForge\Helper\Password;
+namespace App;
 
-$password = Password::generate(8);
+use PHPForge\Helper\PasswordGenerator;
+
+$password = PasswordGenerator::generate(12);
+// e.g. aB3#kL9!mN2@
 ```
 
-
-## Get all timezones
+#### Retrieve all time zones
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-use PHPForge\Helper\Timezone;
+namespace App;
 
-$timezones = Timezone::getAll();
+use PHPForge\Helper\TimeZoneList;
+
+$timezones = TimeZoneList::all();
+// [['timezone' => 'Pacific/Midway', 'name' => 'Pacific/Midway (UTC -11:00)', 'offset' => -39600], ...]
 ```
 
-## Testing
+## Documentation
 
-[Check the documentation testing](/docs/testing.md) to learn about testing.
+For detailed setup, contribution flow, and test execution.
 
-## Support versions
+- 🧪 [Testing Guide](docs/testing.md)
+- 🛠️ [Development Guide](docs/development.md)
 
-[![PHP81](https://img.shields.io/badge/PHP-%3E%3D8.1-787CB5)](https://www.php.net/releases/8.1/en.php)
+## Package information
 
-## License
+[![PHP](https://img.shields.io/badge/%3E%3D8.1-777BB4.svg?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/releases/8.1/en.php)
+[![Latest Stable Version](https://img.shields.io/packagist/v/php-forge/helper.svg?style=for-the-badge&logo=packagist&logoColor=white&label=Stable)](https://packagist.org/packages/php-forge/helper)
+[![Total Downloads](https://img.shields.io/packagist/dt/php-forge/helper.svg?style=for-the-badge&logo=composer&logoColor=white&label=Downloads)](https://packagist.org/packages/php-forge/helper)
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+## Quality code
+
+[![Codecov](https://img.shields.io/codecov/c/github/php-forge/helper.svg?style=for-the-badge&logo=codecov&logoColor=white&label=Coverage)](https://codecov.io/github/php-forge/helper)
+[![PHPStan Level Max](https://img.shields.io/badge/PHPStan-Level%20Max-4F5D95.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/php-forge/helper/actions/workflows/static.yml)
+[![StyleCI](https://img.shields.io/badge/StyleCI-Passed-44CC11.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.styleci.io/repos/667051036?branch=main)
 
 ## Our social networks
 
-[![Twitter](https://img.shields.io/badge/twitter-follow-1DA1F2?logo=twitter&logoColor=1DA1F2&labelColor=555555?style=flat)](https://twitter.com/Terabytesoftw)
+[![Follow on X](https://img.shields.io/badge/-Follow%20on%20X-1DA1F2.svg?style=for-the-badge&logo=x&logoColor=white&labelColor=000000)](https://x.com/Terabytesoftw)
+
+## License
+
+[![License](https://img.shields.io/badge/License-BSD--3--Clause-brightgreen.svg?style=for-the-badge&logo=opensourceinitiative&logoColor=white&labelColor=555555)](LICENSE)
