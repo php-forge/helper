@@ -33,7 +33,6 @@ use function strlen;
  */
 final class PasswordGeneratorTest extends TestCase
 {
-
     public function testGenerateAllowsMinimalLengthForGuarantee(): void
     {
         $buffer = '';
@@ -174,7 +173,6 @@ final class PasswordGeneratorTest extends TestCase
      *
      * - This test verifies pool ordering internals.
      * - Refactoring the poolconstruction will require updating the expected character positions.
-     *
      */
     #[DataProviderExternal(PasswordGeneratorProvider::class, 'poolIndexes')]
     public function testGenerateUsesExpectedCharacterPoolOrder(int $poolIndex, string $expectedPoolCharacter): void
