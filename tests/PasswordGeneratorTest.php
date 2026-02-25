@@ -135,6 +135,11 @@ final class PasswordGeneratorTest extends TestCase
         );
         self::assertSame(
             1,
+            preg_match('/[!@#$%^&*()_\-=+;:,.?]/', $password),
+            "Should include at least '1' special character.",
+        );
+        self::assertSame(
+            1,
             preg_match('/^[a-zA-Z0-9!@#$%^&*()_\-=+;:,.?]+$/', $password),
             'Should contain only characters from the configured password pool.',
         );
