@@ -37,6 +37,7 @@ final class PasswordGeneratorTest extends TestCase
     public static function poolIndexesProvider(): array
     {
         return [
+            'digit segment starts at fifty two' => [52, '0'],
             'lowercase segment starts at zero' => [0, 'a'],
             'special segment starts at sixty two' => [62, '!'],
             'uppercase segment starts at twenty six' => [26, 'A'],
@@ -65,6 +66,11 @@ final class PasswordGeneratorTest extends TestCase
             20,
             preg_match_all('/\d/', $buffer),
             'Should sample digit characters repeatedly.',
+        );
+        self::assertGreaterThan(
+            20,
+            preg_match_all('/[!@#$%^&*()_\-=+;:,.?]/', $buffer),
+            'Should sample special characters repeatedly.',
         );
         self::assertGreaterThan(
             20,
