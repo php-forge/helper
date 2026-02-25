@@ -18,6 +18,7 @@ use Xepozz\InternalMocker\MockerState;
  * - Ensures `snakeToCamel()` returns early without calling `explode()` when no underscore exists.
  * - Ensures `snakeToCamel()` returns expected camel case values.
  * - Ensures `toTitleWords()` formats snake case, camel case, and uppercase values consistently.
+ * - Ensures `toTitleWords()` falls back to `ucfirst()` when `preg_split()` fails.
  *
  * @copyright Copyright (C) 2026 Terabytesoftw.
  * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
@@ -72,6 +73,22 @@ final class WordCaseConverterTest extends TestCase
             $expected,
             WordCaseConverter::toTitleWords($input),
             $message,
+        );
+    }
+
+    public function testToTitleWordsFallsBackWhenPregSplitFails(): void
+    {
+        MockerState::addCondition(
+            'PHPForge\\Helper',
+            'preg_split',
+            ['/(?<=[a-z])(?=[A-Z])|_/', 'foo_bar', -1, 0],
+            false,
+        );
+
+        self::assertSame(
+            'Foo_bar',
+            WordCaseConverter::toTitleWords('foo_bar'),
+            "Should return ucfirst(input) when 'preg_split()' fails.",
         );
     }
 }
