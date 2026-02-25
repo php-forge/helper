@@ -7,6 +7,8 @@ namespace PHPForge\Helper\Tests;
 use InvalidArgumentException;
 use PHPForge\Helper\Exception\Message;
 use PHPForge\Helper\PasswordGenerator;
+use PHPForge\Helper\Tests\Provider\PasswordGeneratorProvider;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
 use Xepozz\InternalMocker\MockerState;
 
@@ -31,18 +33,6 @@ use function strlen;
  */
 final class PasswordGeneratorTest extends TestCase
 {
-    /**
-     * @return array<string, array{int, string}>
-     */
-    public static function poolIndexesProvider(): array
-    {
-        return [
-            'digit segment starts at fifty two' => [52, '0'],
-            'lowercase segment starts at zero' => [0, 'a'],
-            'special segment starts at sixty two' => [62, '!'],
-            'uppercase segment starts at twenty six' => [26, 'A'],
-        ];
-    }
 
     public function testGenerateAllowsMinimalLengthForGuarantee(): void
     {
@@ -66,11 +56,6 @@ final class PasswordGeneratorTest extends TestCase
             20,
             preg_match_all('/\d/', $buffer),
             'Should sample digit characters repeatedly.',
-        );
-        self::assertGreaterThan(
-            20,
-            preg_match_all('/[!@#$%^&*()_\-=+;:,.?]/', $buffer),
-            'Should sample special characters repeatedly.',
         );
         self::assertGreaterThan(
             20,
@@ -101,6 +86,11 @@ final class PasswordGeneratorTest extends TestCase
             20,
             preg_match_all('/\d/', $buffer),
             'Should sample digit characters repeatedly.',
+        );
+        self::assertGreaterThan(
+            20,
+            preg_match_all('/[!@#$%^&*()_\-=+;:,.?]/', $buffer),
+            'Should sample special characters repeatedly.',
         );
     }
 
@@ -185,8 +175,8 @@ final class PasswordGeneratorTest extends TestCase
      * - This test verifies pool ordering internals.
      * - Refactoring the poolconstruction will require updating the expected character positions.
      *
-     * @dataProvider poolIndexesProvider
      */
+    #[DataProviderExternal(PasswordGeneratorProvider::class, 'poolIndexes')]
     public function testGenerateUsesExpectedCharacterPoolOrder(int $poolIndex, string $expectedPoolCharacter): void
     {
         MockerState::addCondition('PHPForge\\Helper', 'random_int', [0, 80], $poolIndex);
