@@ -19,9 +19,9 @@ enum Message: string
     /**
      * Error message for when the password length is too short.
      *
-     * Format: "Password length must be at least '3' characters."
+     * Format: "Password length must be at least '%d' characters."
      */
-    case PASSWORD_LENGTH_TOO_SHORT = "Password length must be at least '3' characters.";
+    case PASSWORD_LENGTH_TOO_SHORT = "Password length must be at least '%d' characters.";
 
     /**
      * Returns the formatted message string for the error case.

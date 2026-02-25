@@ -51,8 +51,8 @@ final class PasswordGenerator
     /**
      * Generates a random password with required character diversity.
      *
-     * Guarantees at least one lowercase letter, one uppercase letter, and one digit. Includes special characters in the
-     * random pool for the remaining characters.
+     * Guarantees at least one lowercase letter, one uppercase letter, one digit, and one special character.
+     * Uses all character groups as the random pool for remaining characters.
      *
      * Usage example:
      * ```php
@@ -61,15 +61,15 @@ final class PasswordGenerator
      *
      * @param int $length Length of the password to generate.
      *
-     * @throws InvalidArgumentException When '$length' is less than '3'.
+     * @throws InvalidArgumentException When '$length' is less than '4'.
      *
      * @return string Generated password.
      */
     public static function generate(int $length): string
     {
-        if ($length < 3) {
+        if ($length < 4) {
             throw new InvalidArgumentException(
-                Message::PASSWORD_LENGTH_TOO_SHORT->getMessage(),
+                Message::PASSWORD_LENGTH_TOO_SHORT->getMessage(4),
             );
         }
 
@@ -77,13 +77,16 @@ final class PasswordGenerator
             self::randomCharacterFrom(self::LOWERCASE),
             self::randomCharacterFrom(self::UPPERCASE),
             self::randomCharacterFrom(self::DIGITS),
+            self::randomCharacterFrom(self::SPECIAL),
         ];
 
         $randomCharacters = [];
-        $remainingLength = $length - 3;
+        $remainingLength = $length - 4;
+
+        $fullPool = implode('', self::POOL);
 
         for ($index = 0; $index < $remainingLength; $index++) {
-            $randomCharacters[] = self::randomCharacterFrom(implode('', self::POOL));
+            $randomCharacters[] = self::randomCharacterFrom($fullPool);
         }
 
         $passwordCharacters = [...$requiredCharacters, ...$randomCharacters];

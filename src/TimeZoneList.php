@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPForge\Helper;
 
-use DateTime;
+use DateTimeImmutable;
 use DateTimeZone;
 use Exception;
 
@@ -21,7 +21,14 @@ use function str_replace;
 final class TimeZoneList
 {
     /**
+     * Canonical UTC reference date for stable offset calculation.
+     */
+    private const REFERENCE_DATE_UTC = '1970-01-01 00:00:00';
+
+    /**
      * Returns all available timezones with formatted names.
+     *
+     * Calculates offsets using a fixed UTC reference date to keep ordering and values stable across seasons.
      *
      * Usage example:
      * ```php
@@ -77,7 +84,8 @@ final class TimeZoneList
      */
     private static function createEntry(string $identifier): array
     {
-        $date = new DateTime('now', new DateTimeZone($identifier));
+        $date = new DateTimeImmutable(self::REFERENCE_DATE_UTC, new DateTimeZone('UTC'));
+        $date = $date->setTimezone(new DateTimeZone($identifier));
         $offset = $date->getOffset();
 
         return [

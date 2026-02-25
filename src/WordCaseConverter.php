@@ -63,7 +63,7 @@ final class WordCaseConverter
 
         foreach ($words as $index => $word) {
             if ($index === 0) {
-                $camelCase = $word;
+                $camelCase = strtolower($word);
             } else {
                 $camelCase .= ucfirst($word);
             }
@@ -75,7 +75,7 @@ final class WordCaseConverter
     /**
      * Converts input text to title words.
      *
-     * Preserves existing behavior for snake case, camel case, and uppercase values.
+     * Splits snake_case and lower-to-upper camel transitions, then capitalizes each resulting segment.
      *
      * Usage example:
      * ```php
@@ -88,7 +88,7 @@ final class WordCaseConverter
      */
     public static function toTitleWords(string $value): string
     {
-        if (preg_match('/^[A-Z][^_]*(_[A-Z][^_]*)*/', $value) === 1) {
+        if (preg_match('/^[A-Z][^_]*(_[A-Z][^_]*)*$/', $value) === 1) {
             $strings = explode('_', $value);
             $word = '';
 
@@ -103,8 +103,7 @@ final class WordCaseConverter
         }
 
         $capitalizedWords = [];
-
-        $words = preg_split('/(?=[A-Z])|_/', $value);
+        $words = preg_split('/(?<=[a-z])(?=[A-Z])|_/', $value);
 
         if ($words === false) {
             return ucfirst($value);

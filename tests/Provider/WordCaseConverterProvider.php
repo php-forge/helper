@@ -69,6 +69,11 @@ final class WordCaseConverterProvider
     public static function snakeToCamelCases(): array
     {
         return [
+            'capitalized first segment is normalized to lower camel' => [
+                'Date_birth',
+                'dateBirth',
+                'Should normalize the first segment to lowercase for camel case output.',
+            ],
             'created at camelizes' => [
                 'created_at',
                 'createdAt',
@@ -117,6 +122,21 @@ final class WordCaseConverterProvider
                 'dateBirth',
                 'Date Birth',
                 'Should split camel case into title words.',
+            ],
+            'each segment properly capitalized' => [
+                'Test_Case',
+                'Test Case',
+                'Should capitalize each segment separated by underscores.',
+            ],
+            'mixed case with underscore' => [
+                'FooBar_baz',
+                'Foo Bar Baz',
+                'Should handle mixed case with underscores correctly.',
+            ],
+            'mixed case with uppercase and lowercase' => [
+                'ABC_def',
+                'ABC Def',
+                'Should handle mixed case with multiple underscores correctly.',
             ],
             'plain text mixed case' => [
                 'Foo Bar',

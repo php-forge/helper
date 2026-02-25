@@ -11,12 +11,15 @@ use PHPUnit\Framework\TestCase;
 use Xepozz\InternalMocker\MockerState;
 
 use function array_slice;
+use function preg_match;
+use function preg_match_all;
+use function strlen;
 
 /**
  * Unit tests for the {@see PasswordGenerator} helper.
  *
  * Test coverage.
- * - Ensures generated passwords include lowercase, uppercase, and digit characters at minimum length.
+ * - Ensures generated passwords include lowercase, uppercase, digit, and special characters at minimum length.
  * - Ensures generated passwords preserve the requested length across repeated calls.
  * - Ensures generated passwords use the expected pool ordering and shuffle random bounds.
  * - Ensures password generation samples all character groups across larger generated buffers.
@@ -29,8 +32,6 @@ use function array_slice;
 final class PasswordGeneratorTest extends TestCase
 {
     /**
-     * Provides deterministic pool indexes for character pool ordering tests.
-     *
      * @return array<string, array{int, string}>
      */
     public static function poolIndexesProvider(): array
@@ -44,12 +45,12 @@ final class PasswordGeneratorTest extends TestCase
 
     public function testGenerateAllowsMinimalLengthForGuarantee(): void
     {
-        $password = PasswordGenerator::generate(3);
+        $password = PasswordGenerator::generate(4);
 
         self::assertSame(
-            3,
+            4,
             strlen($password),
-            "Should generate a password with exactly '3' characters.",
+            "Should generate a password with exactly '4' characters.",
         );
         self::assertSame(
             1,
@@ -65,6 +66,11 @@ final class PasswordGeneratorTest extends TestCase
             1,
             preg_match('/\d/', $password),
             'Should include at least one digit character.',
+        );
+        self::assertSame(
+            1,
+            preg_match('/[!@#$%^&*()_\-=+;:,.?]/', $password),
+            'Should include at least one special character.',
         );
     }
 
@@ -135,6 +141,12 @@ final class PasswordGeneratorTest extends TestCase
         );
     }
 
+    /**
+     * Verifies the shuffle uses {@see \array_splice()} correctly (one item removed per iteration).
+     *
+     * - This test is intentionally coupled to the Fisher-Yates implementation.
+     * - If you refactor the shuffle algorithm, update this test accordingly.
+     */
     public function testGenerateUsesArraySpliceWithSingleItemRemoval(): void
     {
         PasswordGenerator::generate(4);
@@ -145,7 +157,7 @@ final class PasswordGeneratorTest extends TestCase
         self::assertCount(
             4,
             $traces,
-            "Should invoke 'array_splice()' once per generated character.",
+            "Should invoke 'array_splice()' once per generated character at minimum length.",
         );
 
         foreach ($traces as $trace) {
@@ -158,6 +170,11 @@ final class PasswordGeneratorTest extends TestCase
     }
 
     /**
+     * Verifies character pool construction follows the expected order: lowercase, uppercase, digits, special.
+     *
+     * - This test verifies pool ordering internals.
+     * - Refactoring the poolconstruction will require updating the expected character positions.
+     *
      * @dataProvider poolIndexesProvider
      */
     public function testGenerateUsesExpectedCharacterPoolOrder(int $poolIndex, string $expectedPoolCharacter): void
@@ -165,19 +182,27 @@ final class PasswordGeneratorTest extends TestCase
         MockerState::addCondition('PHPForge\\Helper', 'random_int', [0, 80], $poolIndex);
         MockerState::addCondition('PHPForge\\Helper', 'random_int', [0, 25], 0);
         MockerState::addCondition('PHPForge\\Helper', 'random_int', [0, 9], 0);
+        MockerState::addCondition('PHPForge\\Helper', 'random_int', [0, 18], 0);
+        MockerState::addCondition('PHPForge\\Helper', 'random_int', [0, 4], 0);
         MockerState::addCondition('PHPForge\\Helper', 'random_int', [0, 3], 0);
         MockerState::addCondition('PHPForge\\Helper', 'random_int', [0, 2], 0);
         MockerState::addCondition('PHPForge\\Helper', 'random_int', [0, 1], 0);
 
-        $password = PasswordGenerator::generate(4);
+        $password = PasswordGenerator::generate(5);
 
         self::assertSame(
-            "aA0{$expectedPoolCharacter}",
+            "aA0!{$expectedPoolCharacter}",
             $password,
             'Should append the expected pooled character after required character groups.',
         );
     }
 
+    /**
+     * Verifies shuffle uses decreasing random bounds per Fisher-Yates algorithm.
+     *
+     * - This test verifies Fisher-Yates bounds correctness.
+     * - Any change to the shuffle implementation must preserve these bounds for cryptographic security.
+     */
     public function testGenerateUsesExpectedShuffleRandomBounds(): void
     {
         PasswordGenerator::generate(4);
@@ -208,8 +233,8 @@ final class PasswordGeneratorTest extends TestCase
     public function testThrowInvalidArgumentExceptionWhenLengthIsTooShort(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage(Message::PASSWORD_LENGTH_TOO_SHORT->getMessage());
+        $this->expectExceptionMessage(Message::PASSWORD_LENGTH_TOO_SHORT->getMessage(4));
 
-        PasswordGenerator::generate(2);
+        PasswordGenerator::generate(3);
     }
 }

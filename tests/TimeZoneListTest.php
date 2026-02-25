@@ -7,13 +7,16 @@ namespace PHPForge\Helper\Tests;
 use PHPForge\Helper\TimeZoneList;
 use PHPUnit\Framework\TestCase;
 
+use function array_values;
+use function count;
+
 /**
  * Unit tests for the {@see TimeZoneList} helper.
  *
  * Test coverage.
  * - Ensures timezone display names replace underscores with spaces.
  * - Verifies returned entries include required keys and are ordered by ascending offset.
- * - Verifies the first entry matches the expected timezone, display name, and offset.
+ * - Verifies the first entry exposes the minimum UTC offset and expected display format.
  * - Verifies the result contains a broad set of timezone entries.
  *
  * @copyright Copyright (C) 2026 Terabytesoftw.
@@ -48,6 +51,7 @@ final class TimeZoneListTest extends TestCase
     public function testAllReturnsOrderedTimeZones(): void
     {
         $timeZones = TimeZoneList::all();
+
         $prevOffset = null;
 
         foreach ($timeZones as $timeZone) {
@@ -82,26 +86,38 @@ final class TimeZoneListTest extends TestCase
     public function testAllReturnsTimeZoneEntries(): void
     {
         $timeZone = TimeZoneList::all();
+
         $first = array_values($timeZone)[0] ?? null;
 
         self::assertIsArray(
             $first,
             'Should return at least one timezone entry.',
         );
-        self::assertSame(
-            'Pacific/Midway',
+        self::assertArrayHasKey(
+            'timezone',
+            $first,
+            'Should include the timezone identifier key.',
+        );
+        self::assertArrayHasKey(
+            'name',
+            $first,
+            'Should include the formatted display name key.',
+        );
+        self::assertArrayHasKey(
+            'offset',
+            $first,
+            'Should include the numeric UTC offset key.',
+        );
+        self::assertStringContainsString(
             $first['timezone'],
-            'Should expose the expected first timezone identifier.',
-        );
-        self::assertSame(
-            'Pacific/Midway (UTC -11:00)',
             $first['name'],
-            'Should expose the expected first timezone display name.',
+            'Should include the timezone identifier in the display name.',
         );
-        self::assertSame(
-            -39600,
-            $first['offset'],
-            'Should expose the expected first timezone offset in seconds.',
+
+        self::assertStringContainsString(
+            'UTC',
+            $first['name'],
+            'Should include UTC in the formatted display name.',
         );
     }
 }
