@@ -65,6 +65,10 @@ final class MockerExtension implements Extension
             ],
             [
                 'namespace' => 'PHPForge\\Helper',
+                'name' => 'preg_split',
+            ],
+            [
+                'namespace' => 'PHPForge\\Helper',
                 'name' => 'str_contains',
             ],
         ];
