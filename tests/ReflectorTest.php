@@ -31,6 +31,27 @@ use stdClass;
  */
 final class ReflectorTest extends TestCase
 {
+    public function testCacheSizeReturnsNumberOfCachedReflectionClasses(): void
+    {
+        Reflector::clearCache();
+
+        Reflector::shortName(ReflectionFixture::class);
+
+        self::assertSame(
+            1,
+            Reflector::cacheSize(),
+            'Should return one cached class after first reflection lookup.',
+        );
+
+        Reflector::shortName(stdClass::class);
+
+        self::assertSame(
+            2,
+            Reflector::cacheSize(),
+            'Should increase cache size when reflecting a different class.',
+        );
+    }
+
     public function testClassAttributesReturnsAllClassAttributes(): void
     {
         $attributes = Reflector::classAttributes(ReflectionFixture::class);
@@ -70,6 +91,26 @@ final class ReflectorTest extends TestCase
         );
     }
 
+    public function testClearCacheEmptiesReflectionClassCache(): void
+    {
+        Reflector::clearCache();
+        Reflector::shortName(ReflectionFixture::class);
+
+        self::assertGreaterThan(
+            0,
+            Reflector::cacheSize(),
+            'Should populate cache after reflection usage.',
+        );
+
+        Reflector::clearCache();
+
+        self::assertSame(
+            0,
+            Reflector::cacheSize(),
+            'Should clear all cached reflection classes.',
+        );
+    }
+
     public function testFirstPropertyAttributeReturnsFirstMatchingAttributeInstance(): void
     {
         $attribute = Reflector::firstPropertyAttribute(ReflectionFixture::class, 'name', Label::class);
@@ -102,6 +143,27 @@ final class ReflectorTest extends TestCase
         self::assertFalse(
             Reflector::hasProperty(ReflectionFixture::class, 'missing'),
             "Should return 'false' for missing properties.",
+        );
+    }
+
+    public function testPropertiesReturnsAllPropertiesWhenFilterIsNull(): void
+    {
+        $allProperties = Reflector::properties(ReflectionFixture::class);
+        $allPropertyNames = [];
+
+        foreach ($allProperties as $property) {
+            $allPropertyNames[] = $property->getName();
+        }
+
+        self::assertContains(
+            'name',
+            $allPropertyNames,
+            'Should include public properties when no filter is provided.',
+        );
+        self::assertContains(
+            'hidden',
+            $allPropertyNames,
+            'Should include private properties when no filter is provided.',
         );
     }
 

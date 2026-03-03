@@ -48,6 +48,21 @@ final class Reflector
     private static array $reflectionClassCache = [];
 
     /**
+     * Returns the current number of cached reflection classes.
+     *
+     * Usage example:
+     * ```php
+     * $cacheSize = \PHPForge\Helper\Reflector::cacheSize();
+     * ```
+     *
+     * @return int Number of cached reflection classes.
+     */
+    public static function cacheSize(): int
+    {
+        return count(self::$reflectionClassCache);
+    }
+
+    /**
      * Returns class attributes, optionally filtered by attribute class.
      *
      * Usage example:
@@ -72,6 +87,19 @@ final class Reflector
         }
 
         return $reflectionClass->getAttributes($attribute, $flags);
+    }
+
+    /**
+     * Clears the internal reflection class cache.
+     *
+     * Usage example:
+     * ```php
+     * \PHPForge\Helper\Reflector::clearCache();
+     * ```
+     */
+    public static function clearCache(): void
+    {
+        self::$reflectionClassCache = [];
     }
 
     /**
@@ -135,11 +163,11 @@ final class Reflector
     {
         $reflectionClass = self::reflectionClass($class);
 
-        if ($filter === null) {
-            return $reflectionClass->getProperties();
+        if ($filter !== null) {
+            return $reflectionClass->getProperties($filter);
         }
 
-        return $reflectionClass->getProperties($filter);
+        return $reflectionClass->getProperties();
     }
 
     /**
