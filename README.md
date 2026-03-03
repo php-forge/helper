@@ -22,7 +22,7 @@
 
 <p align="center">
     <strong>Small, focused helpers for common PHP tasks</strong><br>
-    <em>Convert word casing, generate passwords, and list time zones with predictable output.</em>
+    <em>Convert word casing, inspect metadata, generate passwords, and list time zones with predictable output.</em>
 </p>
 
 ## Features
@@ -35,7 +35,7 @@
 ### Installation
 
 ```bash
-composer require php-forge/helper:^0.1
+composer require php-forge/helper:^0.2
 ```
 
 ### Quick start
@@ -115,12 +115,32 @@ $timezones = TimeZoneList::all();
 // [['timezone' => 'Pacific/Midway', 'name' => 'Pacific/Midway (UTC -11:00)', 'offset' => -39600], ...]
 ```
 
+#### Inspect class metadata with Reflector
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App;
+
+use PHPForge\Helper\Reflector;
+
+$shortName = Reflector::shortName(\App\Domain\User::class);
+$types = Reflector::propertyTypeNames(\App\Domain\User::class, 'email');
+$attributes = Reflector::propertyAttributes(\App\Domain\User::class, 'email');
+```
+
 ## Documentation
 
-For detailed setup, contribution flow, and test execution.
+For detailed configuration options and advanced usage.
 
+- 📚 [Installation Guide](docs/installation.md)
+- ⚙️ [Configuration Reference](docs/configuration.md)
+- 💡 [Usage Examples](docs/examples.md)
 - 🧪 [Testing Guide](docs/testing.md)
 - 🛠️ [Development Guide](docs/development.md)
+- 🔄 [Upgrade Guide](UPGRADE.md)
 
 ## Package information
 

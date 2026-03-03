@@ -2,6 +2,8 @@
 
 ## 0.2.1 Under development
 
+- Enh #0: Add `Reflector` helper for class, property, type, and attribute metadata introspection (@terabytesoftw)
+
 ## 0.2.0 February 25, 2024
 
 - Enh #6: Refactor codebase to improve performance (@terabytesoftw)

@@ -1,7 +1,7 @@
 {
     "name": "php-forge/helper",
     "type": "library",
-    "description": "PHP Helper.",
+    "description": "PHPForge Helpers for Common PHP Tasks.",
     "keywords": [
         "php-forge",
         "helper",

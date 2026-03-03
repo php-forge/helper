@@ -24,6 +24,20 @@ enum Message: string
     case PASSWORD_LENGTH_TOO_SHORT = "Password length must be at least '%d' characters.";
 
     /**
+     * Error message for missing reflected property.
+     *
+     * Format: "Property '%s' does not exist in '%s'."
+     */
+    case REFLECTOR_PROPERTY_NOT_FOUND = "Property '%s' does not exist in '%s'.";
+
+    /**
+     * Error message for invalid reflection target.
+     *
+     * Format: "Invalid reflection target '%s'."
+     */
+    case REFLECTOR_TARGET_INVALID = "Invalid reflection target '%s'.";
+
+    /**
      * Returns the formatted message string for the error case.
      *
      * Usage example:
