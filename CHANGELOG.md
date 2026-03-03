@@ -1,5 +1,7 @@
 # ChangeLog
 
+## 0.2.1 Under development
+
 ## 0.2.1 March 3, 2026
 
 - Enh #9: Add `Reflector` helper for class, property, type, and attribute metadata introspection (@terabytesoftw)
