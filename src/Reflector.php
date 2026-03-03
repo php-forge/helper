@@ -210,6 +210,7 @@ final class Reflector
      *     SomeAttribute::class,
      *     ReflectionAttribute::IS_INSTANCEOF,
      * );
+     * ```
      *
      * @return array Instantiated property attributes.
      *
