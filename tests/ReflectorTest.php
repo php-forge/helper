@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use PHPForge\Helper\Exception\Message;
 use PHPForge\Helper\Reflector;
 use PHPForge\Helper\Tests\Support\Attribute\{Label, Marker};
-use PHPForge\Helper\Tests\Support\Contract\{LeftContract, Status, UsesTimestamp};
+use PHPForge\Helper\Tests\Support\Contract\{LeftContract, RightContract, Status, UsesTimestamp};
 use PHPForge\Helper\Tests\Support\Model\ReflectionFixture;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -23,7 +23,7 @@ use stdClass;
  * - Detects whether a property exists on the reflection target.
  * - Extracts class and property attributes, including filtered lookups.
  * - Resolves first matching property attribute instances or returns `null` when no match exists.
- * - Resolves property type names for mixed, untyped, named, nullable, union, and intersection declarations.
+ * - Resolves property type names for DNF, mixed, untyped, named, nullable, union, and intersection declarations.
  * - Returns reflection properties and throws {@see InvalidArgumentException} for missing properties.
  * - Returns short names for class, enum, interface, trait, and anonymous targets and throws
  *   {@see InvalidArgumentException} for invalid targets.
@@ -283,6 +283,42 @@ final class ReflectorTest extends TestCase
             [],
             Reflector::propertyTypeNames(ReflectionFixture::class, 'untyped'),
             'Should return an empty list for untyped properties.',
+        );
+    }
+
+    public function testPropertyTypeNamesReturnsExpectedNamesForDnfProperty(): void
+    {
+        if (PHP_VERSION_ID < 80200) {
+            self::markTestSkipped('DNF types require PHP 8.2 or later.');
+        }
+
+        $className = 'PHPForge\\Helper\\Tests\\Support\\Model\\DnfFixture';
+
+        if (!class_exists($className)) {
+            eval(
+                <<<'PHP'
+namespace PHPForge\Helper\Tests\Support\Model;
+
+use PHPForge\Helper\Tests\Support\Contract\LeftContract;
+use PHPForge\Helper\Tests\Support\Contract\RightContract;
+use PHPForge\Helper\Tests\Support\Contract\Status;
+
+final class DnfFixture
+{
+    public (LeftContract&RightContract)|Status $value;
+}
+PHP
+            );
+        }
+
+        self::assertSame(
+            [
+                Status::class,
+                LeftContract::class,
+                RightContract::class,
+            ],
+            Reflector::propertyTypeNames($className, 'value'),
+            'Should include all named members from DNF type declarations.',
         );
     }
 

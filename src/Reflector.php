@@ -11,6 +11,7 @@ use ReflectionClass;
 use ReflectionIntersectionType;
 use ReflectionNamedType;
 use ReflectionProperty;
+use ReflectionType;
 use ReflectionUnionType;
 
 use function array_map;
@@ -290,16 +291,7 @@ final class Reflector
         }
 
         if ($type instanceof ReflectionUnionType || $type instanceof ReflectionIntersectionType) {
-            /** @var list<string> $typeNames */
-            $typeNames = [];
-
-            foreach ($type->getTypes() as $nestedType) {
-                if ($nestedType instanceof ReflectionNamedType) {
-                    $typeNames[] = $nestedType->getName();
-                }
-            }
-
-            return $typeNames;
+            return self::collectNestedTypeNames($type);
         }
 
         return [];
@@ -320,6 +312,38 @@ final class Reflector
         $reflectionClass = self::reflectionClass($class);
 
         return $reflectionClass->isAnonymous() ? '' : $reflectionClass->getShortName();
+    }
+
+    /**
+     * Collects all named type names from nested union/intersection type structures.
+     *
+     * @return array Type names collected from the nested type structure.
+     *
+     * @phpstan-return list<string>
+     */
+    private static function collectNestedTypeNames(ReflectionIntersectionType|ReflectionUnionType $type): array
+    {
+        $typeNames = [];
+
+        $queue = $type->getTypes();
+
+        while ($queue !== []) {
+            $nestedType = array_shift($queue);
+
+            if ($nestedType instanceof ReflectionNamedType) {
+                $typeNames[] = $nestedType->getName();
+
+                continue;
+            }
+
+            if ($nestedType instanceof ReflectionUnionType || $nestedType instanceof ReflectionIntersectionType) {
+                foreach ($nestedType->getTypes() as $innerType) {
+                    $queue[] = $innerType;
+                }
+            }
+        }
+
+        return $typeNames;
     }
 
     /**
