@@ -1,6 +1,8 @@
 # ChangeLog
 
-## 0.2.1 Under development
+## 0.2.2 Under development
+
+- Enh #10: Add generic PHPStan annotations to `Reflector` for typed attribute inference in consumers (@terabytesoftw)
 
 ## 0.2.1 March 3, 2026
 
