@@ -14,9 +14,13 @@ use ReflectionProperty;
 use ReflectionUnionType;
 
 use function array_map;
+use function array_shift;
 use function class_exists;
 use function count;
+use function enum_exists;
+use function interface_exists;
 use function is_object;
+use function trait_exists;
 
 /**
  * Provides lightweight reflection utilities for classes and properties.
@@ -38,7 +42,7 @@ final class Reflector
     /**
      * Maximum number of cached reflection classes.
      */
-    private const MAX_REFLECTION_CLASS_CACHE_SIZE = 1024;
+    private const MAX_REFLECTION_CLASS_CACHE_SIZE = 512;
 
     /**
      * Stores reflection instances keyed by class name.
@@ -234,7 +238,7 @@ final class Reflector
      *     SomeClass::class,
      *     'someProperty',
      *     SomeAttribute::class,
-     *  ReflectionAttribute::IS_INSTANCEOF,
+     *     ReflectionAttribute::IS_INSTANCEOF,
      * );
      * ```
      *
@@ -278,7 +282,7 @@ final class Reflector
         if ($type instanceof ReflectionNamedType) {
             $typeName = $type->getName();
 
-            if ($type->allowsNull() && $typeName !== 'null') {
+            if ($type->allowsNull() && $typeName !== 'null' && $typeName !== 'mixed') {
                 return [$typeName, 'null'];
             }
 
@@ -331,7 +335,12 @@ final class Reflector
     {
         $className = is_object($class) ? $class::class : $class;
 
-        if (!class_exists($className)) {
+        if (
+            !class_exists($className)
+            && !interface_exists($className)
+            && !trait_exists($className)
+            && !enum_exists($className)
+        ) {
             throw new InvalidArgumentException(
                 Message::REFLECTOR_TARGET_INVALID->getMessage($className),
             );
@@ -345,7 +354,7 @@ final class Reflector
 
         if (!$reflectionClass->isAnonymous()) {
             if (count(self::$reflectionClassCache) >= self::MAX_REFLECTION_CLASS_CACHE_SIZE) {
-                self::$reflectionClassCache = [];
+                array_shift(self::$reflectionClassCache);
             }
 
             self::$reflectionClassCache[$className] = $reflectionClass;

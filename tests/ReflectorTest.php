@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use PHPForge\Helper\Exception\Message;
 use PHPForge\Helper\Reflector;
 use PHPForge\Helper\Tests\Support\Attribute\{Label, Marker};
+use PHPForge\Helper\Tests\Support\Contract\{LeftContract, Status, UsesTimestamp};
 use PHPForge\Helper\Tests\Support\Model\ReflectionFixture;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -18,13 +19,14 @@ use stdClass;
  * Unit tests for the {@see Reflector} helper.
  *
  * Test coverage.
- * - Caches reflection class instances for repeated lookups and resets the cache when its size limit is reached.
+ * - Caches reflection class instances for repeated lookups and evicts the oldest entry at cache-size limit.
  * - Detects whether a property exists on the reflection target.
  * - Extracts class and property attributes, including filtered lookups.
  * - Resolves first matching property attribute instances or returns `null` when no match exists.
- * - Resolves property type names for untyped, named, nullable, union, and intersection declarations.
+ * - Resolves property type names for mixed, untyped, named, nullable, union, and intersection declarations.
  * - Returns reflection properties and throws {@see InvalidArgumentException} for missing properties.
- * - Returns short class names for named and anonymous classes and throws.
+ * - Returns short names for class, enum, interface, trait, and anonymous targets and throws
+ *   {@see InvalidArgumentException} for invalid targets.
  *
  * @copyright Copyright (C) 2026 Terabytesoftw.
  * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
@@ -211,7 +213,10 @@ final class ReflectorTest extends TestCase
         }
 
         self::assertSame(
-            ['primary', 'secondary'],
+            [
+                'primary',
+                'secondary',
+            ],
             $instanceValues,
             'Should preserve declaration order for instantiated repeatable attributes.',
         );
@@ -320,7 +325,16 @@ final class ReflectorTest extends TestCase
         );
     }
 
-    public function testReflectionClassCacheIsResetWhenCacheSizeLimitIsReached(): void
+    public function testPropertyTypeNamesReturnsMixedWithoutExplicitNull(): void
+    {
+        self::assertSame(
+            ['mixed'],
+            Reflector::propertyTypeNames(ReflectionFixture::class, 'payload'),
+            "Should return only 'mixed' without appending an explicit null type.",
+        );
+    }
+
+    public function testReflectionClassCacheEvictsOldestEntryWhenCacheSizeLimitIsReached(): void
     {
         $reflectorClass = new ReflectionClass(Reflector::class);
 
@@ -343,14 +357,19 @@ final class ReflectorTest extends TestCase
         $cacheAfterInsert = $cacheProperty->getValue();
 
         self::assertCount(
-            1,
+            $cacheLimit,
             $cacheAfterInsert,
-            'Should reset cache and keep only the latest reflected class after limit is reached.',
+            'Should keep cache size at the configured limit after inserting a new class.',
+        );
+        self::assertArrayNotHasKey(
+            'cached-0',
+            $cacheAfterInsert,
+            'Should evict the oldest cached entry when cache size limit is reached.',
         );
         self::assertArrayHasKey(
             ReflectionFixture::class,
             $cacheAfterInsert,
-            'Should keep the class being reflected after cache reset.',
+            'Should cache the newly reflected class after evicting the oldest entry.',
         );
     }
 
@@ -406,12 +425,39 @@ final class ReflectorTest extends TestCase
         );
     }
 
+    public function testShortNameReturnsShortNameForEnumTarget(): void
+    {
+        self::assertSame(
+            'Status',
+            Reflector::shortName(Status::class),
+            'Should return the short name for enum targets.',
+        );
+    }
+
+    public function testShortNameReturnsShortNameForInterfaceTarget(): void
+    {
+        self::assertSame(
+            'LeftContract',
+            Reflector::shortName(LeftContract::class),
+            'Should return the short name for interface targets.',
+        );
+    }
+
     public function testShortNameReturnsShortNameForNamedClass(): void
     {
         self::assertSame(
             'ReflectionFixture',
             Reflector::shortName(ReflectionFixture::class),
             'Should return the short name for named classes.',
+        );
+    }
+
+    public function testShortNameReturnsShortNameForTraitTarget(): void
+    {
+        self::assertSame(
+            'UsesTimestamp',
+            Reflector::shortName(UsesTimestamp::class),
+            'Should return the short name for trait targets.',
         );
     }
 
