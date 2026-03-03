@@ -1,11 +1,15 @@
 {
     "name": "php-forge/helper",
     "type": "library",
-    "description": "PHPForge Helpers for Common PHP Tasks.",
+    "description": "Small, focused helpers for common PHP tasks.",
     "keywords": [
+        "php",
         "php-forge",
         "helper",
-        "php"
+        "reflector",
+        "timezone",
+        "password",
+        "case-conversion"
     ],
     "license": "BSD-3-Clause",
     "require": {

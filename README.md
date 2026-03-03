@@ -136,11 +136,9 @@ $attributes = Reflector::propertyAttributes(\App\Domain\User::class, 'email');
 For detailed configuration options and advanced usage.
 
 - 📚 [Installation Guide](docs/installation.md)
-- ⚙️ [Configuration Reference](docs/configuration.md)
 - 💡 [Usage Examples](docs/examples.md)
 - 🧪 [Testing Guide](docs/testing.md)
 - 🛠️ [Development Guide](docs/development.md)
-- 🔄 [Upgrade Guide](UPGRADE.md)
 
 ## Package information
 

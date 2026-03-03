@@ -25,15 +25,6 @@ use function trait_exists;
 /**
  * Provides lightweight reflection utilities for classes and properties.
  *
- * Usage examples:
- * ```php
- * // Get short class name
- * $shortName = \PHPForge\Helper\Reflector::shortName(SomeClass::class);
- *
- * // Check if a property exists
- * $hasProperty = \PHPForge\Helper\Reflector::hasProperty(SomeClass::class, 'someProperty');
- * ```
- *
  * @copyright Copyright (C) 2026 Terabytesoftw.
  * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
  */
