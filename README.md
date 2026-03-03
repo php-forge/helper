@@ -126,9 +126,9 @@ namespace App;
 
 use PHPForge\Helper\Reflector;
 
-$shortName = Reflector::shortName(App\Domain\User::class);
-$types = Reflector::propertyTypeNames(App\Domain\User::class, 'email');
-$attributes = Reflector::propertyAttributes(App\Domain\User::class, 'email');
+$shortName = Reflector::shortName(\App\Domain\User::class);
+$types = Reflector::propertyTypeNames(\App\Domain\User::class, 'email');
+$attributes = Reflector::propertyAttributes(\App\Domain\User::class, 'email');
 ```
 
 ## Documentation

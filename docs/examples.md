@@ -88,10 +88,10 @@ namespace App;
 
 use PHPForge\Helper\Reflector;
 
-$shortName = Reflector::shortName(App\Domain\User::class);
-$hasEmail = Reflector::hasProperty(App\Domain\User::class, 'email');
-$typeNames = Reflector::propertyTypeNames(App\Domain\User::class, 'email');
-$attributes = Reflector::propertyAttributes(App\Domain\User::class, 'email');
+$shortName = Reflector::shortName(\App\Domain\User::class);
+$hasEmail = Reflector::hasProperty(\App\Domain\User::class, 'email');
+$typeNames = Reflector::propertyTypeNames(\App\Domain\User::class, 'email');
+$attributes = Reflector::propertyAttributes(\App\Domain\User::class, 'email');
 ```
 
 ## Reflector cache lifecycle in long-running workers
