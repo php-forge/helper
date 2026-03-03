@@ -2,6 +2,8 @@
 
 ## 0.2.1 Under development
 
+- Enh #10: Add generic PHPStan annotations to `Reflector` for typed attribute inference in consumers (@terabytesoftw)
+
 ## 0.2.1 March 3, 2026
 
 - Enh #9: Add `Reflector` helper for class, property, type, and attribute metadata introspection (@terabytesoftw)

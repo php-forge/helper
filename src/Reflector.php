@@ -71,7 +71,9 @@ final class Reflector
      *
      * @return array Class attributes.
      *
-     * @phpstan-return list<ReflectionAttribute<object>>
+     * @phpstan-template TAttribute of object
+     * @phpstan-param class-string<TAttribute>|null $attribute
+     * @phpstan-return ($attribute is null ? list<ReflectionAttribute<object>> : list<ReflectionAttribute<TAttribute>>)
      */
     public static function classAttributes(object|string $class, string|null $attribute = null, int $flags = 0): array
     {
@@ -111,6 +113,10 @@ final class Reflector
      * ```
      *
      * @return object|null First matching instantiated attribute, or `null` if no matching attribute is found.
+     *
+     * @phpstan-template TAttribute of object
+     * @phpstan-param class-string<TAttribute> $attribute
+     * @phpstan-return TAttribute|null
      */
     public static function firstPropertyAttribute(
         object|string $class,
@@ -205,7 +211,9 @@ final class Reflector
      *
      * @return array Instantiated property attributes.
      *
-     * @phpstan-return list<object>
+     * @phpstan-template TAttribute of object
+     * @phpstan-param class-string<TAttribute>|null $attribute
+     * @phpstan-return ($attribute is null ? list<object> : list<TAttribute>)
      */
     public static function propertyAttributeInstances(
         object|string $class,
@@ -236,7 +244,9 @@ final class Reflector
      *
      * @return array Property attributes.
      *
-     * @phpstan-return list<ReflectionAttribute<object>>
+     * @phpstan-template TAttribute of object
+     * @phpstan-param class-string<TAttribute>|null $attribute
+     * @phpstan-return ($attribute is null ? list<ReflectionAttribute<object>> : list<ReflectionAttribute<TAttribute>>)
      */
     public static function propertyAttributes(
         object|string $class,
