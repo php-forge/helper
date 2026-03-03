@@ -11,7 +11,6 @@ use ReflectionClass;
 use ReflectionIntersectionType;
 use ReflectionNamedType;
 use ReflectionProperty;
-use ReflectionType;
 use ReflectionUnionType;
 
 use function array_map;
