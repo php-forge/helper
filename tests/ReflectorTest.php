@@ -277,11 +277,11 @@ final class ReflectorTest extends TestCase
             eval(
                 <<<'PHP_WRAP'
                 namespace PHPForge\Helper\Tests\Support\Model;
-                
+
                 use PHPForge\Helper\Tests\Support\Contract\LeftContract;
                 use PHPForge\Helper\Tests\Support\Contract\RightContract;
                 use PHPForge\Helper\Tests\Support\Contract\Status;
-                
+
                 final class DnfFixture
                 {
                     public (LeftContract&RightContract)|Status $value;
