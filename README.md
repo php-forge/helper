@@ -1,8 +1,6 @@
 <!-- markdownlint-disable MD041 -->
 <p align="center">
-    <a href="https://github.com/php-forge/helper" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/103309199?s%25253D400%252526u%25253Dca3561c692f53ed7eb290d3bb226a2828741606f%252526v%25253D4" width="35%" alt="PHP Forge">
-    </a>
+    <img src="https://raw.githubusercontent.com/php-forge/.github/refs/heads/main/logo/logo.png" alt="PHP Forge" width="35%">
     <h1 align="center">PHP Helper</h1>
     <br>
 </p>
@@ -154,6 +152,7 @@ For detailed configuration options and advanced usage.
 ## Our social networks
 
 [![Follow on X](https://img.shields.io/badge/-Follow%20on%20X-1DA1F2.svg?style=for-the-badge&logo=x&logoColor=white&labelColor=000000)](https://x.com/Terabytesoftw)
+[![Follow on Facebook](https://img.shields.io/badge/-Follow%20on%20Facebook-1877F2.svg?style=for-the-badge&logo=facebook&logoColor=white&labelColor=000000)](https://www.facebook.com/wilmer.arambula.9)
 
 ## License
 
