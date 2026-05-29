@@ -14,16 +14,13 @@ use function str_replace;
 
 /**
  * Provides timezone metadata sorted by UTC offset.
- *
- * @copyright Copyright (C) 2026 Terabytesoftw.
- * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
  */
 final class TimeZoneList
 {
     /**
      * Canonical UTC reference date for stable offset calculation.
      */
-    private const REFERENCE_DATE_UTC = '1970-01-01 00:00:00';
+    private const string REFERENCE_DATE_UTC = '1970-01-01 00:00:00';
 
     /**
      * Returns all available timezones with formatted names.

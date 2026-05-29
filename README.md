@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD041 -->
 <p align="center">
     <a href="https://github.com/php-forge/helper" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/103309199?s=400&u=ca3561c692f53ed7eb290d3bb226a2828741606f&v=4" alt="PHP Forge" width="150px">
+        <img src="https://avatars.githubusercontent.com/u/103309199?s%25253D400%252526u%25253Dca3561c692f53ed7eb290d3bb226a2828741606f%252526v%25253D4" width="35%" alt="PHP Forge">
     </a>
     <h1 align="center">PHP Helper</h1>
     <br>
@@ -28,14 +28,14 @@
 ## Features
 
 <picture>
-    <source media="(min-width: 768px)" srcset="./docs/svgs/features.svg">
-    <img src="./docs/svgs/features-mobile.svg" alt="Feature Overview" style="width: 100%;">
+    <source media="(max-width: 767px)" srcset="./docs/svgs/features-mobile.svg">
+    <img src="./docs/svgs/features.svg" alt="Feature Overview" style="width: 100%;">
 </picture>
 
 ### Installation
 
 ```bash
-composer require php-forge/helper:^0.2
+composer require php-forge/helper:^0.3
 ```
 
 ### Quick start
@@ -97,7 +97,7 @@ namespace App;
 use PHPForge\Helper\PasswordGenerator;
 
 $password = PasswordGenerator::generate(12);
-// e.g. aB3#kL9!mN2@
+// for example, aB3#kL9!mN2@
 ```
 
 #### Retrieve all time zones
@@ -138,11 +138,10 @@ For detailed configuration options and advanced usage.
 - 📚 [Installation Guide](docs/installation.md)
 - 💡 [Usage Examples](docs/examples.md)
 - 🧪 [Testing Guide](docs/testing.md)
-- 🛠️ [Development Guide](docs/development.md)
 
 ## Package information
 
-[![PHP](https://img.shields.io/badge/%3E%3D8.1-777BB4.svg?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/releases/8.1/en.php)
+[![PHP](https://img.shields.io/badge/%3E%3D8.3-777BB4.svg?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/releases/8.3/en.php)
 [![Latest Stable Version](https://img.shields.io/packagist/v/php-forge/helper.svg?style=for-the-badge&logo=packagist&logoColor=white&label=Stable)](https://packagist.org/packages/php-forge/helper)
 [![Total Downloads](https://img.shields.io/packagist/dt/php-forge/helper.svg?style=for-the-badge&logo=composer&logoColor=white&label=Downloads)](https://packagist.org/packages/php-forge/helper)
 

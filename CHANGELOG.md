@@ -1,6 +1,8 @@
 # ChangeLog
 
-## 0.2.3 Under development
+## 0.3.0 Under development
+
+- chore: update dependencies and configuration files.
 
 ## 0.2.2 March 4, 2026
 

@@ -12,11 +12,9 @@ use PHPForge\Helper\Tests\Support\Contract\RightContract;
 
 /**
  * Stub model exposing varied property metadata for reflection helper tests.
- *
- * @copyright Copyright (C) 2026 Terabytesoftw.
- * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
  */
 #[Label('model')]
+#[Marker]
 final class ReflectionFixture
 {
     public int $id = 1;
