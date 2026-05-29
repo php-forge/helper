@@ -24,16 +24,13 @@ use function trait_exists;
 
 /**
  * Provides lightweight reflection utilities for classes and properties.
- *
- * @copyright Copyright (C) 2026 Terabytesoftw.
- * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
  */
 final class Reflector
 {
     /**
      * Maximum number of cached reflection classes.
      */
-    private const MAX_REFLECTION_CLASS_CACHE_SIZE = 512;
+    private const int MAX_REFLECTION_CLASS_CACHE_SIZE = 512;
 
     /**
      * Stores reflection instances keyed by class name.
@@ -79,11 +76,9 @@ final class Reflector
     {
         $reflectionClass = self::reflectionClass($class);
 
-        if ($attribute === null) {
-            return $reflectionClass->getAttributes();
-        }
-
-        return $reflectionClass->getAttributes($attribute, $flags);
+        return $attribute === null
+            ? $reflectionClass->getAttributes()
+            : $reflectionClass->getAttributes($attribute, $flags);
     }
 
     /**
@@ -256,11 +251,9 @@ final class Reflector
     ): array {
         $reflectionProperty = self::property($class, $property);
 
-        if ($attribute === null) {
-            return $reflectionProperty->getAttributes();
-        }
-
-        return $reflectionProperty->getAttributes($attribute, $flags);
+        return $attribute === null
+            ? $reflectionProperty->getAttributes()
+            : $reflectionProperty->getAttributes($attribute, $flags);
     }
 
     /**
@@ -337,7 +330,7 @@ final class Reflector
                 continue;
             }
 
-            if ($nestedType instanceof ReflectionUnionType || $nestedType instanceof ReflectionIntersectionType) {
+            if ($nestedType instanceof ReflectionIntersectionType) {
                 foreach ($nestedType->getTypes() as $innerType) {
                     $queue[] = $innerType;
                 }

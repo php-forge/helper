@@ -17,19 +17,6 @@ use stdClass;
 
 /**
  * Unit tests for the {@see Reflector} helper.
- *
- * Test coverage.
- * - Caches reflection class instances for repeated lookups and evicts the oldest entry at cache-size limit.
- * - Detects whether a property exists on the reflection target.
- * - Extracts class and property attributes, including filtered lookups.
- * - Resolves first matching property attribute instances or returns `null` when no match exists.
- * - Resolves property type names for DNF, mixed, untyped, named, nullable, union, and intersection declarations.
- * - Returns reflection properties and throws {@see InvalidArgumentException} for missing properties.
- * - Returns short names for class, enum, interface, trait, and anonymous targets and throws
- *   {@see InvalidArgumentException} for invalid targets.
- *
- * @copyright Copyright (C) 2026 Terabytesoftw.
- * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
  */
 final class ReflectorTest extends TestCase
 {
@@ -59,7 +46,7 @@ final class ReflectorTest extends TestCase
         $attributes = Reflector::classAttributes(ReflectionFixture::class);
 
         self::assertCount(
-            1,
+            2,
             $attributes,
             'Should return all class-level attributes when no filter is passed.',
         );
@@ -86,10 +73,16 @@ final class ReflectorTest extends TestCase
     {
         $attributes = Reflector::classAttributes(ReflectionFixture::class, Label::class);
 
-        self::assertCount(
-            1,
-            $attributes,
-            'Should return only matching class attributes for the requested filter.',
+        $attributeNames = [];
+
+        foreach ($attributes as $attribute) {
+            $attributeNames[] = $attribute->getName();
+        }
+
+        self::assertSame(
+            [Label::class],
+            $attributeNames,
+            'Filter must return only the requested attribute type.',
         );
     }
 
@@ -267,16 +260,6 @@ final class ReflectorTest extends TestCase
         );
     }
 
-    public function testPropertyThrowsInvalidArgumentExceptionWhenPropertyDoesNotExist(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage(
-            Message::REFLECTOR_PROPERTY_NOT_FOUND->getMessage('missing', ReflectionFixture::class),
-        );
-
-        Reflector::property(ReflectionFixture::class, 'missing');
-    }
-
     public function testPropertyTypeNamesReturnsEmptyArrayForUntypedProperty(): void
     {
         self::assertSame(
@@ -288,26 +271,22 @@ final class ReflectorTest extends TestCase
 
     public function testPropertyTypeNamesReturnsExpectedNamesForDnfProperty(): void
     {
-        if (PHP_VERSION_ID < 80200) {
-            self::markTestSkipped('DNF types require PHP 8.2 or later.');
-        }
-
         $className = 'PHPForge\\Helper\\Tests\\Support\\Model\\DnfFixture';
 
         if (!class_exists($className)) {
             eval(
-                <<<'PHP'
-namespace PHPForge\Helper\Tests\Support\Model;
-
-use PHPForge\Helper\Tests\Support\Contract\LeftContract;
-use PHPForge\Helper\Tests\Support\Contract\RightContract;
-use PHPForge\Helper\Tests\Support\Contract\Status;
-
-final class DnfFixture
-{
-    public (LeftContract&RightContract)|Status $value;
-}
-PHP
+                <<<'PHP_WRAP'
+                namespace PHPForge\Helper\Tests\Support\Model;
+                
+                use PHPForge\Helper\Tests\Support\Contract\LeftContract;
+                use PHPForge\Helper\Tests\Support\Contract\RightContract;
+                use PHPForge\Helper\Tests\Support\Contract\Status;
+                
+                final class DnfFixture
+                {
+                    public (LeftContract&RightContract)|Status $value;
+                }
+                PHP_WRAP
             );
         }
 
@@ -326,8 +305,8 @@ PHP
     {
         self::assertSame(
             [
-                'PHPForge\\Helper\\Tests\\Support\\Contract\\LeftContract',
-                'PHPForge\\Helper\\Tests\\Support\\Contract\\RightContract',
+                LeftContract::class,
+                RightContract::class,
             ],
             Reflector::propertyTypeNames(ReflectionFixture::class, 'intersection'),
             'Should include all named intersection members.',
@@ -497,7 +476,7 @@ PHP
         );
     }
 
-    public function testThrowsInvalidArgumentExceptionForInvalidReflectionTarget(): void
+    public function testThrowInvalidArgumentExceptionForInvalidReflectionTarget(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage(
@@ -505,5 +484,15 @@ PHP
         );
 
         Reflector::shortName('missing\\class\\Name');
+    }
+
+    public function testThrowInvalidArgumentExceptionWhenPropertyDoesNotExist(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            Message::REFLECTOR_PROPERTY_NOT_FOUND->getMessage('missing', ReflectionFixture::class),
+        );
+
+        Reflector::property(ReflectionFixture::class, 'missing');
     }
 }

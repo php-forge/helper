@@ -7,12 +7,9 @@ namespace PHPForge\Helper\Exception;
 use function sprintf;
 
 /**
- * Represents error message templates for attribute exceptions.
+ * Represents error message templates for helper exceptions.
  *
  * Use {@see Message::getMessage()} to format the template with `sprintf()` arguments.
- *
- * @copyright Copyright (C) 2026 Terabytesoftw.
- * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
  */
 enum Message: string
 {
@@ -43,7 +40,7 @@ enum Message: string
      * Usage example:
      * ```php
      * throw new InvalidArgumentException(
-     *     \PHPForge\Helper\Exception\Message::PASSWORD_LENGTH_TOO_SHORT->getMessage(),
+     *     \PHPForge\Helper\Exception\Message::PASSWORD_LENGTH_TOO_SHORT->getMessage(4),
      * );
      * ```
      *

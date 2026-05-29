@@ -20,16 +20,7 @@ use function strlen;
 /**
  * Unit tests for the {@see PasswordGenerator} helper.
  *
- * Test coverage.
- * - Ensures generated passwords include lowercase, uppercase, digit, and special characters at minimum length.
- * - Ensures generated passwords preserve the requested length across repeated calls.
- * - Ensures generated passwords use the expected pool ordering and shuffle random bounds.
- * - Ensures password generation samples all character groups across larger generated buffers.
- * - Ensures shuffle logic removes one character per `array_splice()` call.
- * - Throws an exception when the requested password length is lower than the allowed minimum.
- *
- * @copyright Copyright (C) 2026 Terabytesoftw.
- * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
+ * {@see PasswordGeneratorProvider} for test case data providers.
  */
 final class PasswordGeneratorTest extends TestCase
 {

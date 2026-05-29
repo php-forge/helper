@@ -13,15 +13,6 @@ use function str_replace;
 
 /**
  * Unit tests for the {@see TimeZoneList} helper.
- *
- * Test coverage.
- * - Ensures timezone display names replace underscores with spaces.
- * - Verifies returned entries include required keys and are ordered by ascending offset.
- * - Verifies the first entry exposes the minimum UTC offset and expected display format.
- * - Verifies the result contains a broad set of timezone entries.
- *
- * @copyright Copyright (C) 2026 Terabytesoftw.
- * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
  */
 final class TimeZoneListTest extends TestCase
 {

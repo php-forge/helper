@@ -13,15 +13,7 @@ use Xepozz\InternalMocker\MockerState;
 /**
  * Unit tests for the {@see WordCaseConverter} helper.
  *
- * Test coverage.
- * - Ensures `camelToSnake()` converts camel case values to snake case.
- * - Ensures `snakeToCamel()` returns early without calling `explode()` when no underscore exists.
- * - Ensures `snakeToCamel()` returns expected camel case values.
- * - Ensures `toTitleWords()` formats snake case, camel case, and uppercase values consistently.
- * - Ensures `toTitleWords()` falls back to `ucfirst()` when `preg_split()` fails.
- *
- * @copyright Copyright (C) 2026 Terabytesoftw.
- * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
+ * {@see WordCaseConverterProvider} for test case data providers.
  */
 final class WordCaseConverterTest extends TestCase
 {

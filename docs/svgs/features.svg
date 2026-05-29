@@ -1,70 +1,56 @@
-<svg fill="none" viewBox="0 0 1200 410" width="100%" height="430" xmlns="http://www.w3.org/2000/svg">
-    <foreignObject width="100%" height="100%">
-        <div xmlns="http://www.w3.org/1999/xhtml">
-            <style>
-                .container {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 20px;
-                    padding: 20px;
-                }
-                .alert-box {
-                    border-left: 4px solid #1f883d;
-                    padding: 12px;
-                    margin-bottom: 16px;
-                    border-radius: 6px;
-                    background: rgba(31, 136, 61, 0.1);
-                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                    width: 100%;
-                    box-sizing: border-box;
-                }
-                .alert-title {
-                    margin: 0 0 8px 0;
-                    font-weight: 600;
-                }
-                .alert-content {
-                    margin: 0;
-                    line-height: 1.5;
-                }
+<svg viewBox="0 0 1200 380" width="100%" height="340" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        .box-bg { fill: #e6f4ea; stroke: #a7cdb3; stroke-width: 1; }
+        .title { font-weight: 700; font-size: 16px; fill: #1a202c; }
+        .content { font-size: 13px; fill: #4a5568; }
+    </style>
 
-                @media (prefers-color-scheme: light) {
-                    .alert-title { color: #000000; }
-                    .alert-content { color: #333333; }
-                    .alert-box { background: rgba(31, 136, 61, 0.1); }
-                }
+    <g>
+        <rect class="box-bg" x="20" y="20" width="570" height="100" rx="6"/>
+        <rect x="20" y="20" width="4" height="100" fill="#1f883d"/>
+        <text class="title" x="40" y="50">Bounded Metadata Cache</text>
+        <text class="content" x="40" y="78">Reuse reflection metadata with bounded FIFO eviction</text>
+        <text class="content" x="40" y="98">Explicit cache lifecycle control for long-running workers</text>
+    </g>
 
-                @media (prefers-color-scheme: dark) {
-                    .alert-title { color: #ffffff; }
-                    .alert-content { color: #ffffff; }
-                    .alert-box { background: rgba(31, 136, 61, 0.2); }
-                }
-            </style>
-            <div class="container">
-                <div class="alert-box">
-                    <p class="alert-title"><strong>Bounded Metadata Cache</strong></p>
-                    <p class="alert-content">Reuse reflection metadata with bounded FIFO eviction and explicit cache lifecycle control for long-running workers.</p>
-                </div>
-                <div class="alert-box">
-                    <p class="alert-title"><strong>Password Generation</strong></p>
-                    <p class="alert-content">Generate secure passwords with lowercase, uppercase, digits, and special characters.</p>
-                </div>
-                <div class="alert-box">
-                    <p class="alert-title"><strong>Reflection Metadata</strong></p>
-                    <p class="alert-content">Inspect class short names, properties, attributes, and property types including union, intersection, and DNF declarations.</p>
-                </div>
-                <div class="alert-box">
-                    <p class="alert-title"><strong>Predictable Output</strong></p>
-                    <p class="alert-content">Helpers are deterministic in shape and formatting, making them safe for APIs, forms, and data pipelines.</p>
-                </div>
-                <div class="alert-box">
-                    <p class="alert-title"><strong>Time Zone Catalog</strong></p>
-                    <p class="alert-content">Retrieve all PHP time zones with UTC offsets, formatted labels, and deterministic sorting.</p>
-                </div>
-                <div class="alert-box">
-                    <p class="alert-title"><strong>Word Case Conversion</strong></p>
-                    <p class="alert-content">Convert between <code>camelToSnake()</code>, <code>snakeToCamel()</code>, and <code>toTitleWords()</code> with consistent output.</p>
-                </div>
-            </div>
-        </div>
-    </foreignObject>
+    <g>
+        <rect class="box-bg" x="610" y="20" width="570" height="100" rx="6"/>
+        <rect x="610" y="20" width="4" height="100" fill="#1f883d"/>
+        <text class="title" x="630" y="50">Password Generation</text>
+        <text class="content" x="630" y="78">Generate secure passwords with guaranteed character diversity</text>
+        <text class="content" x="630" y="98">Lowercase, uppercase, digits and special characters included</text>
+    </g>
+
+    <g>
+        <rect class="box-bg" x="20" y="140" width="570" height="100" rx="6"/>
+        <rect x="20" y="140" width="4" height="100" fill="#1f883d"/>
+        <text class="title" x="40" y="170">Predictable Output</text>
+        <text class="content" x="40" y="198">Deterministic shape and formatting across every helper</text>
+        <text class="content" x="40" y="218">Safe for APIs, forms and data pipelines</text>
+    </g>
+
+    <g>
+        <rect class="box-bg" x="610" y="140" width="570" height="100" rx="6"/>
+        <rect x="610" y="140" width="4" height="100" fill="#1f883d"/>
+        <text class="title" x="630" y="170">Reflection Metadata</text>
+        <text class="content" x="630" y="198">Inspect class short names, properties and attributes</text>
+        <text class="content" x="630" y="218">Resolve union, intersection and DNF property type names</text>
+    </g>
+
+    <g>
+        <rect class="box-bg" x="20" y="260" width="570" height="100" rx="6"/>
+        <rect x="20" y="260" width="4" height="100" fill="#1f883d"/>
+        <text class="title" x="40" y="290">Time Zone Catalog</text>
+        <text class="content" x="40" y="318">Retrieve all PHP time zones with UTC offsets and labels</text>
+        <text class="content" x="40" y="338">Deterministic sorting by ascending offset</text>
+    </g>
+
+    <g>
+        <rect class="box-bg" x="610" y="260" width="570" height="100" rx="6"/>
+        <rect x="610" y="260" width="4" height="100" fill="#1f883d"/>
+        <text class="title" x="630" y="290">Word Case Conversion</text>
+        <text class="content" x="630" y="318">Convert between camelToSnake(), snakeToCamel() and toTitleWords()</text>
+        <text class="content" x="630" y="338">Consistent output across casing transformations</text>
+    </g>
 </svg>

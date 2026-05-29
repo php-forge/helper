@@ -59,7 +59,7 @@ namespace App;
 use PHPForge\Helper\PasswordGenerator;
 
 $password = PasswordGenerator::generate(12);
-// e.g. aB3#kL9!mN2@
+// for example, aB3#kL9!mN2@
 ```
 
 ## Retrieve all time zones
@@ -116,4 +116,4 @@ if ($size > 400) {
 
 - 📚 [Installation guide](installation.md)
 - 🧪 [Testing guide](testing.md)
-- 🛠️ [Development guide](development.md)
+- 📖 [Readme](../README.md)

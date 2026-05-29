@@ -12,26 +12,23 @@ use function strlen;
 
 /**
  * Generates secure passwords from mixed character sets.
- *
- * @copyright Copyright (C) 2026 Terabytesoftw.
- * @license https://opensource.org/license/bsd-3-clause BSD 3-Clause License.
  */
 final class PasswordGenerator
 {
     /**
      * Digits for password generation.
      */
-    private const DIGITS = '0123456789';
+    private const string DIGITS = '0123456789';
 
     /**
      * Lowercase letters for password generation.
      */
-    private const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+    private const string LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
 
     /**
      * Character pools for password generation.
      */
-    private const POOL = [
+    private const array POOL = [
         self::LOWERCASE,
         self::UPPERCASE,
         self::DIGITS,
@@ -41,12 +38,12 @@ final class PasswordGenerator
     /**
      * Special characters for password generation.
      */
-    private const SPECIAL = '!@#$%^&*()_-=+;:,.?';
+    private const string SPECIAL = '!@#$%^&*()_-=+;:,.?';
 
     /**
      * Uppercase letters for password generation.
      */
-    private const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    private const string UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     /**
      * Generates a random password with required character diversity.
@@ -61,7 +58,7 @@ final class PasswordGenerator
      *
      * @param int $length Length of the password to generate.
      *
-     * @throws InvalidArgumentException When '$length' is less than '4'.
+     * @throws InvalidArgumentException When `$length` is less than `4`.
      *
      * @return string Generated password.
      */
