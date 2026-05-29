@@ -1,8 +1,6 @@
 <!-- markdownlint-disable MD041 -->
 <p align="center">
-    <picture>
-        <img src="https://raw.githubusercontent.com/php-forge/.github/refs/heads/main/logo/logo.png" alt="PHP Forge" width="35%">
-    </picture>
+    <img src="https://raw.githubusercontent.com/php-forge/.github/refs/heads/main/logo/logo.png" alt="PHP Forge" width="35%">
     <h1 align="center">PHP Helper</h1>
     <br>
 </p>
