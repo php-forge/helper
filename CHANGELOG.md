@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.3.1 Under development
 
+- chore: update `README.md` with new logo and social media links.
+
 ## 0.3.0 May 29, 2026
 
 - chore: update dependencies and configuration files.
